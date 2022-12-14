@@ -1,9 +1,8 @@
 # atomic-red-team
 # T1613 -  Container and Resource Discovery
 ## [Description from ATT&CK](https://attack.mitre.org/techniques/T1613/)
-<blockquote>Adversaries may abuse a container administration service to execute commands within a container. A container administration service such as the Docker daemon, the Kubernetes API server, or the kubelet may allow remote management of containers within an environment.(Citation: Docker Daemon CLI)(Citation: Kubernetes API)(Citation: Kubernetes Kubelet)
-
-In Docker, adversaries may specify an entrypoint during container deployment that executes a script or command, or they may use a command such as <code>docker exec</code> to execute a command within a running container.(Citation: Docker Entrypoint)(Citation: Docker Exec) In Kubernetes, if an adversary has sufficient permissions, they may gain remote execution in a container in the cluster via interaction with the Kubernetes API server, the kubelet, or by running a command such as <code>kubectl exec</code>.(Citation: Kubectl Exec Get Shell)</blockquote>
+<blockquote>Adversaries may attempt to discover containers and other resources that are available within a containers environment. Other resources may include images, deployments, pods, nodes.
+In Docker, logs may leak information about the environment, such as the environment’s configuration, which services are available, and what cloud provider the victim may be utilizing. The discovery of these resources may inform an adversary’s next steps in the environment, such as how to perform lateral movement and which methods to utilize for execution.</blockquote>
 
 ## Atomic Tests
 
@@ -35,7 +34,7 @@ Adversaries may attempt to discover containers and other resources that are avai
 
 
 ```bash
-docker build -t t1613  src/
+docker build -t t1613  /src
 docker run -d -t t1613
 docker ps
 
