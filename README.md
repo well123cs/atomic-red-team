@@ -6,18 +6,18 @@ In Docker, logs may leak information about the environment, such as the environm
 
 ## Atomic Tests
 
-- [Atomic Test #1 - ExecIntoContainer](#atomic-test-1---execintocontainer)
+- [Atomic Test #1 - ContainerResourceDiscovery](#atomic-test-1---ContainerResourceDiscovery)
 
 
 <br/>
 
-## Atomic Test #1 - ExecIntoContainer
+## Atomic Test #1 - ContainerResourceDiscovery
 Adversaries may attempt to discover containers and other resources that are available within a containers environment. 
 
 **Supported Platforms:** Containers
 
 
-**auto_generated_guid:** d03bfcd3-ed87-49c8-8880-44bb772dea4b
+**auto_generated_guid:** 
 
 
 
@@ -37,6 +37,7 @@ Adversaries may attempt to discover containers and other resources that are avai
 docker build -t t1613  /src
 docker run -d -t t1613
 docker ps
+docker logs --tail 10 $(docker ps)
 
 ```
 
