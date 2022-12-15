@@ -14,20 +14,10 @@ In Docker, logs may leak information about the environment, such as the environm
 ## Atomic Test #1 - ContainerResourceDiscovery
 Adversaries may attempt to discover containers and other resources that are available within a containers environment. 
 
-**Supported Platforms:** Containers
+**Supported Platforms:** docker
 
 
 **auto_generated_guid:** 
-
-
-
-
-
-#### Inputs:
-| Name | Description | Type | Default Value |
-|------|-------------|------|---------------|
-| namespace | K8s namespace to use | String | default|
-| command | Command to run | String | uname|
 
 
 #### Attack Commands: Run with `bash`! 
@@ -52,12 +42,12 @@ docker rm $(docker stop $(docker ps -a -q --filter ancestor=t1613))
 ##### Description: Docker must be installed
 ##### Check Prereq Commands:
 ```bash
-command -v docker
+which docker
 
 ```
 ##### Get Prereq Commands:
 ```bash
-echo "docker must be installed manually"
+ sudo apt-get -y install docker
 
 ```
 
