@@ -34,10 +34,10 @@ Adversaries may attempt to discover containers and other resources that are avai
 
 
 ```bash
-docker build -t t1613  /src
-docker run -d -t t1613
 docker ps
-docker logs --tail 10 $(docker ps)
+docker logs --tail 10 $(docker ps -l -q --filter ancestor=t1613)
+docker stats --no-stream
+docker inspect $(docker ps -a -q --filter ancestor=t1613)
 
 ```
 
