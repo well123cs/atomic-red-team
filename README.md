@@ -49,7 +49,7 @@ docker rm $(docker stop $(docker ps -a -q --filter ancestor=t1613))
 
 
 #### Dependencies:  Run with `bash`!
-##### Description: kubectl must be installed
+##### Description: Docker must be installed
 ##### Check Prereq Commands:
 ```bash
 command -v docker
@@ -58,6 +58,7 @@ command -v docker
 ##### Get Prereq Commands:
 ```bash
 echo "docker must be installed manually"
+
 ```
 
 
