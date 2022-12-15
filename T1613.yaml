@@ -14,7 +14,11 @@ atomic_tests:
       which docker
     get_prereq_command: |
       if [ "" == "`which docker`" ]; then echo "Docker Not Found"; if [ -n "`which apt-get`" ]; then sudo apt-get -y install docker ; elif [ -n "`which yum`" ]; then sudo yum -y install docker ; fi ; else echo "Docker installed"; fi
-  
+  - description: Verify docker service is running.
+    prereq_command: |
+      sudo systemctl status docker
+    get_prereq_command: |
+      sudo systemctl start docker
   - description: Verify docker service is running.
     prereq_command: |
       sudo systemctl status docker
@@ -22,42 +26,13 @@ atomic_tests:
       sudo systemctl start docker
     executor:
     command: |
-    docker build -t t1613 /root/Docker
-    docker run --name t1610_container --rm -itd t1610 bash /tmp/script.sh
+    docker build -t t1613 /root/src
+    docker run -d -t t1613
+    docker ps
+    docker logs --tail 10 $(docker ps -l -q --filter ancestor=t1613)
+    
     name: bash
     cleanup_command: |
       docker rm $(docker stop $(docker ps -a -q --filter ancestor=t1613))
-
-
-  input_arguments:
-    services:
-  foo:
-    image: Ubuntu
-    environment:
-      - COMPOSE_PROJECT_NAME
-    command: echo "I'm running ${COMPOSE_PROJECT_NAME}"
-    namespace:
-      description: K8s namespace to use
-      type: String
-      default: default
-    command:
-      description: Command to run
-      type: String
-      default: uname
-  dependencies:
-  - description: |
-      Docker must be installed
-    get_prereq_command: |
-      echo "Docker must be installed manually"
-    prereq_command: |
-      which Docker
-  executor:
-    command: |
-      docker build -t t1613 /root/Docker
-      docker run -d -t t1613
-      docker ps
-    cleanup_command: |
-      docker stop $(docker ps -a -q)
-      docker rmi -f t1613 /root/Docker
     name: bash
     elevation_required: false
