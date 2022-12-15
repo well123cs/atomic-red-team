@@ -50,6 +50,18 @@ which docker
  sudo apt-get -y install docker
 
 ```
+##### Description: Run test container
+##### Check Prereq Commands:
+```bash
+docker ps
+
+```
+##### Get Prereq Commands:
+```bash
+docker build -t t1613 /src
+docker run -d -t t1613
+
+```
 
 
 
